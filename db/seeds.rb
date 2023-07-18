@@ -1,34 +1,42 @@
-# This will delete any existing rows from the Product and User tables
-# so you can run the seed file multiple times without having duplicate entries in your database
+# # This will delete any existing rows from the Product and User tables
+# # so you can run the seed file multiple times without having duplicate entries in your database
+# require_relative '../config/environment'
 
-  puts "Deleting old data..."
-  Product.destroy_all
-  User.destroy_all
+puts "Deleting old data..."
+Product.destroy_all
+User.destroy_all
 
-  puts "Creating users..."
-  user1 = User.create(name: Faker::Name.name)
-  user2 = User.create(name: Faker::Name.name)
-  user3 = User.create(name: Faker::Name.name)
+#   puts "Creating users..."
+#   user1 = User.create(name: Faker::Name.name)
+#   user2 = User.create(name: Faker::Name.name)
+#   user3 = User.create(name: Faker::Name.name)
 
-  puts "Creating products..."
-  product1 = Product.create(name: "Stapler", price: 10)
-  product2 = Product.create(name: "Whiteboard", price: 15)
-  product3 = Product.create(name: "Dry Erase Markers", price: 5)
-  product4 = Product.create(name: "Ballpoint Pens", price: 2)
-  product5 = Product.create(name: "Scotch Tape", price: 3)
+puts "Creating users..."
+user1 = User.create(name: "Agatha")
+user2 = User.create(name: "Lylla")
+user3 = User.create(name: "Jackson")
 
-  puts "Creating reviews..."
-  # *****************************************************************
-  # * TODO: create reviews! Remember, a review belongs to a product *
-  # * and a review belongs to a user.                              *
-  # *****************************************************************
-  # Create Reviews Here
-  product1.leave_review(user1, 4, "Chipped but works!")
-  product5.leave_review(user2, 5, "Just ok")
-  product2.leave_review(user1, 3, "Very smooth, inaandikika kwa urahisi")
-  product3.leave_review(user3, 2, "They aren't even refillable!!")
-  product4.leave_review(user2, 4, "Nice")
-  product2.leave_review(user3, 5, "Meh, could be better")
+puts "Creating products..."
+product1 = Product.create(name: "Stapler", price: 10)
+product2 = Product.create(name: "Whiteboard", price: 15)
+product3 = Product.create(name: "Dry Erase Markers", price: 5)
+product4 = Product.create(name: "Ballpoint Pens", price: 2)
+product5 = Product.create(name: "Scotch Tape", price: 3)
 
-  puts "Seeding done!"
+puts "Creating reviews..."
+#   *****************************************************************
+#   * TODO: create reviews! Remember, a review belongs to a product *
+#   * and a review belongs to a user.                              *
+#   *****************************************************************
+#   Create Reviews Here
+Review.create(star_rating: 4, comment: "Terrible", product_id: product2.id, user_id: user2.id)
+Review.create(star_rating: 5, comment: "Meh", product_id: product1.id, user_id: user3.id)
+Review.create(star_rating: 8, comment: "Amazing product", product_id: product3.id, user_id: user1.id)
+Review.create(star_rating: 3, comment: "They are okay, I cannot complain", product_id: product3.id, user_id: user1.id)
+Review.create(star_rating: 9, comment: "Bad quality, absolutely hate", product_id: product5.id, user_id: user3.id)
+Review.create(star_rating: 6, comment: "These are nice", product_id: product3.id, user_id: user1.id)
+Review.create(star_rating: 1, comment: "Impressive!!", product_id: product4.id, user_id: user3.id)
+Review.create(star_rating: 7, comment: "Good quality.", product_id: product1.id, user_id: user2.id)
+
+puts "Seeding done!"
 
