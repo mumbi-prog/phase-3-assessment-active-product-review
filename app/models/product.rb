@@ -17,5 +17,5 @@ class Product < ActiveRecord::Base
       reviews.average(:star_rating).to_f
     end
     
-end
+end 
   
