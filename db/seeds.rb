@@ -1,6 +1,5 @@
 # # This will delete any existing rows from the Product and User tables
 # # so you can run the seed file multiple times without having duplicate entries in your database
-# require_relative '../config/environment'
 
 puts "Deleting old data..."
 Product.destroy_all
@@ -29,14 +28,18 @@ puts "Creating reviews..."
 #   * and a review belongs to a user.                              *
 #   *****************************************************************
 #   Create Reviews Here
-Review.create(star_rating: 4, comment: "Terrible", product_id: product2.id, user_id: user2.id)
-Review.create(star_rating: 5, comment: "Meh", product_id: product1.id, user_id: user3.id)
-Review.create(star_rating: 8, comment: "Amazing product", product_id: product3.id, user_id: user1.id)
-Review.create(star_rating: 3, comment: "They are okay, I cannot complain", product_id: product3.id, user_id: user1.id)
-Review.create(star_rating: 9, comment: "Bad quality, absolutely hate", product_id: product5.id, user_id: user3.id)
-Review.create(star_rating: 6, comment: "These are nice", product_id: product3.id, user_id: user1.id)
-Review.create(star_rating: 1, comment: "Impressive!!", product_id: product4.id, user_id: user3.id)
-Review.create(star_rating: 7, comment: "Good quality.", product_id: product1.id, user_id: user2.id)
+Review.create!(
+  [
+    { user: user2, product: product2, star_rating: 1, comment: "Terrible" },
+    { user: user3, product: product1, star_rating: 2, comment: "Meh" },
+    { user: user1, product: product3, star_rating: 5, comment: "Amazing product" },
+    { user: user1, product: product3, star_rating: 3, comment: "They are okay, I cannot complain" },
+    { user: user3, product: product5, star_rating: 1, comment: "Bad quality, absolutely hate" },
+    { user: user1, product: product3, star_rating: 4, comment: "These are nice" },
+    { user: user3, product: product4, star_rating: 5, comment: "Impressive!!" },
+    { user: user2, product: product1, star_rating: 4, comment: "Good quality." }
+  ]
+)
 
 puts "Seeding done!"
 
